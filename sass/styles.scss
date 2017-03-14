@@ -1,0 +1,10 @@
+@import 'base-variables';
+@import 'base-mixins';
+
+@import 'leaflet';
+
+.map{
+	width:400px;
+	height:600px;
+	background:$trib-gray4;
+}
