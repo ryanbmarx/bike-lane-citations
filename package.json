@@ -31,7 +31,10 @@
   },
   "tribune": {},
   "dependencies": {
+    "d3-array": "^1.1.1",
+    "d3-request": "^1.0.5",
     "d3-scale": "^1.0.5",
+    "d3-selection": "^1.0.5",
     "leaflet": "^1.0.3",
     "leaflet-providers": "^1.1.16"
   }

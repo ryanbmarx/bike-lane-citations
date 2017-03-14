@@ -7,6 +7,9 @@ module.exports = function(grunt) {
   //     npm install --save jquery
   var VENDOR_LIBRARIES = [
     'd3-scale',
+    'd3-array',
+    'd3-request',
+    'd3-selection',
     'leaflet',
     'leaflet-providers'
   ];
