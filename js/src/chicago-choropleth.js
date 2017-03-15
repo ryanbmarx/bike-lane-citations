@@ -5,7 +5,7 @@ import 'leaflet-providers';
 
 // import inlineQuantLegend from './inline-quant-legend.js';
 
-function styleFeature(featureFillColor){
+function styleFeature(featureFillColor, featureOpacityColor){
 	// http://leafletjs.com/reference.html#path-options
 	return {
 		color: "#eee",
@@ -13,7 +13,7 @@ function styleFeature(featureFillColor){
 		weight:1,
 		fillColor:featureFillColor,
 		className:'tract',
-		fillOpacity: .9
+		fillOpacity: featureOpacityColor
 	};
 }
 
@@ -33,7 +33,7 @@ class ChicagoChropleth {
 		app.ROOT_URL = app.options.ROOT_URL != undefined ? app.options.ROOT_URL : "";
 
 		app.initMap();
-		app.drawGeojson(app.data, app.options.propertyToMap, app.options.colorRamp)
+		app.drawGeojson(app.data, app.options.propertyToMap, app.options.colorRamp, app.options.opacityRamp)
 	}
 
 	initMap(){
@@ -48,9 +48,7 @@ class ChicagoChropleth {
 		);
 
 		if (app.options.maxBounds != undefined){
-			console.log('setting max bounds');
 			const max = app.options.maxBounds;
-			console.log(max);
 			app.map.setMaxBounds(L.latLngBounds(max[0], max[1]));
 		}
 
@@ -59,24 +57,30 @@ class ChicagoChropleth {
 		// L.tileLayer.provider('Stamen.TonerBackground').addTo(app.map);
 	}
 
-	drawGeojson(data, propertyToMap, colorRamp){
+	drawGeojson(data, propertyToMap, colorRamp, opacityRamp){
 		const app = this;
 		// Make a scale using the desired feature attriobute.
 		const dataExtent = extent(data.features, d => parseFloat(d.properties[propertyToMap]));
 
-		const mapDataScale = scaleQuantize()
+		const mapColorScale = scaleQuantize()
 			.domain(dataExtent)
 			.range(colorRamp);
 
-		// inlineQuantLegend(mapDataScale);
+		const mapOpacityScale = scaleQuantize()
+			.domain(dataExtent)
+			.range(opacityRamp);
+
+		// inlineQuantLegend(mapColorScale);
 
 		// This applies the geojson to the map 
 			L.geoJSON(data, {
 				style: function(feature){
-					// console.log(mapDataScale(parseFloat(feature.properties[propertyToMap])), feature.properties[propertyToMap]);
-					const featureFillColor = mapDataScale(parseFloat(feature.properties[propertyToMap]));
+					// console.log(mapColorScale(parseFloat(feature.properties[propertyToMap])), feature.properties[propertyToMap]);
+					const featureFillColor = mapColorScale(parseFloat(feature.properties[propertyToMap]));
+					const featureFillOpacity = mapOpacityScale(parseFloat(feature.properties[propertyToMap]));
+
 					// Returns a style object for each tract
-					return styleFeature(featureFillColor);
+					return styleFeature(featureFillColor, featureFillOpacity);
 				},
 				onEachFeature: onEachFeature
 			}).addTo(app.map);
