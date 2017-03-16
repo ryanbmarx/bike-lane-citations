@@ -29,7 +29,8 @@ $map_height:400px;
 	&__container{
 		width:100%;
 		height:$map_height;
-		background:$trib-gray4;		
+		background:$trib-gray4;	
+		overflow:hidden;	
 	}
 
 	&__source{
@@ -42,7 +43,7 @@ $map_height:400px;
 		@include agate();
 		position: absolute;
 		margin:0;
-		top:0;
+		top:2px;
 	}
 
 	&__box{
@@ -61,6 +62,7 @@ $map_height:400px;
 
 	.map{
 		width:100%;
+		padding:0 20px;
 
 		&__container{
 			height:200px;

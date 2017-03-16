@@ -47,17 +47,31 @@ function addLegend(mapContainer, colorScale, opacityScale, formatString){
 		const legendContainer = d3.select(mapContainer)
 			.append('div')
 			.classed('map__legend', true)
-			.style('background','red')
+			.style('background','rgba(255, 255, 255, .8')
 			.style('position','absolute')
 			.style('left',0)
 			.style('top',0)
 			.style('z-index', 1000)
-			.style('width','100%')
+			.style('width','calc(100% - 55px)')
 			.style('height','30px')
-			.style('background', 'white');
+			.style('margin', '0 0 0 55px')
+			.style('box-shadow', '-3px 3px 3px rgba(0,0,0,.25)');
 		inlineQuantLegend(legendContainer, colorScale, opacityScale, formatString);
 	}
 
+
+/*
+background: rgba(255, 255, 255, .8);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    width: calc(100% - 55px);
+    height: 30px;
+    margin-left: 55px;
+
+
+*/
 
 class ChicagoChropleth {
 	constructor(options){

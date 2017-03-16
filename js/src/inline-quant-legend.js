@@ -36,7 +36,7 @@ function inlineQuantLegend(container, colorScale, opacityScale, formatString){
 
 		if (bucketCounter == 0){
 			label.style('left', 0)
-				.style('margin-left', 0);
+				.style('margin-left', '3px');
 		} else {
 			const labelWidth = label.node().getBoundingClientRect().width;
 			label.style('left', `${bucketCounter * width}%`)
@@ -50,7 +50,7 @@ function inlineQuantLegend(container, colorScale, opacityScale, formatString){
 				.classed('legend__label', true)
 				.text(formatter(colorScale.invertExtent(bucket)[1]))
 				.style('right', 0)
-				.style('margin-left', 0);
+				.style('margin-right', '3px');
 		}
 		
 	})
