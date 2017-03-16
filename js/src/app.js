@@ -13,6 +13,9 @@ window.onload = function(){
 		for (var i = 0; i < maps.length; i++){
 			
 			const property = maps[i].dataset.value;
+			const format = maps[i].dataset.format;
+			console.log(format);
+
 			const commuters = new ChicagoChorpleth({
 				container: maps[i].querySelector('.map__container'),
 				data:  data,
@@ -26,7 +29,7 @@ window.onload = function(){
 				colorRamp:["#FFFFC4","#F5F50A","#EB964F","#C11B17"],
 				opacityRamp:[.5, .8, .8, .8],
 				addLegend:true, // Whether or not to show a legend
-				legendFormatString:'.1s', // d3.format() string.
+				legendFormatString:format, // d3.format() string.
 				propertyStrokeColor:"#eee", // border color for each shape on the map
 				propertyStrokeWeight:1, // Border weight for each feature
 				// Must provide two lat/lng pairs (northwest and southeast 
