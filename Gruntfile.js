@@ -10,6 +10,7 @@ module.exports = function(grunt) {
     'd3-array',
     'd3-request',
     'd3-selection',
+    'd3-format',
     'leaflet',
     'leaflet-providers'
   ];
