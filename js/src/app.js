@@ -7,7 +7,7 @@ window.onload = function(){
 	
 	const maps = document.querySelectorAll('.map');
 
-	json(`http://${ window.ROOT_URL }/data/tickets-population.geojson`, (err, data) => {
+	json(`http://${ window.ROOT_URL }/data/tickets-population-nonwhite.geojson`, (err, data) => {
 		if (err) throw err;
 
 		for (var i = 0; i < maps.length; i++){
