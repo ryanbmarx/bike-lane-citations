@@ -1,9 +1,9 @@
 import {scaleQuantize} from 'd3-scale';
 import {extent} from 'd3-array';
+import * as d3 from 'd3-selection';
 import * as L from "leaflet";
 import 'leaflet-providers';
-
-// import inlineQuantLegend from './inline-quant-legend.js';
+import inlineQuantLegend from './inline-quant-legend.js';
 
 function styleFeature(featureFillColor, featureOpacityColor){
 	// http://leafletjs.com/reference.html#path-options
@@ -17,10 +17,12 @@ function styleFeature(featureFillColor, featureOpacityColor){
 	};
 }
 
-function onEachFeature(feature, layer){
+function onEachFeature(feature, layer, tooltips){
 	// Everything in this function is executed on each feature.
-	layer.id = feature.properties.NAME10;
-	layer.bindPopup(feature.properties.NAMELSAD10);
+	if (tooltips != false && tooltips != undefined){
+		layer.id = feature.properties[tooltips];
+		layer.bindPopup(feature.properties[tooltips]);
+	}
 }
 
 
@@ -31,9 +33,24 @@ class ChicagoChropleth {
 		app.container = app.options.container;
 		app.data = app.options.data;
 		app.ROOT_URL = app.options.ROOT_URL != undefined ? app.options.ROOT_URL : "";
+		app.tooltips = app.options.tooltipPropertyLabel;
 
 		app.initMap();
 		app.drawGeojson(app.data, app.options.propertyToMap, app.options.colorRamp, app.options.opacityRamp)
+		
+		console.log(app.options.addLegend);
+		if (app.options.addLegend == true) {
+			app.addLegend()
+		}
+	}
+
+	addLegend(){
+	// 	console.log('adding legend');
+	// 	const app = this;
+	// 	const legendContainer = d3.select(app.container)
+	// 		.append('div')
+	// 		.classed('legend', true);
+	// 	app.addLegend(legendContainer);
 	}
 
 	initMap(){
@@ -82,7 +99,7 @@ class ChicagoChropleth {
 					// Returns a style object for each tract
 					return styleFeature(featureFillColor, featureFillOpacity);
 				},
-				onEachFeature: onEachFeature
+				onEachFeature: onEachFeature(app.tooltips)
 			}).addTo(app.map);
 	}
 }

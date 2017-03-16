@@ -20,6 +20,8 @@ window.onload = function(){
 				ROOT_URL: window.ROOT_URL,
 				mapCenter: [41.886635, -87.637839],
 				propertyToMap: property,
+				// Use false or omit to skip tooltips. Otherwise, put the string of the feature property to go in the tooltip.
+				tooltipPropertyLabel: false,
 				// As many hex color strings (in order of lowest to highest) 
 				// as you would like, stored in an array.
 
