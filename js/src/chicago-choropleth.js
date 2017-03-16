@@ -41,6 +41,24 @@ function cleanUpRamps(ramp){
 	
 }
 
+function addLegend(mapContainer, colorScale, opacityScale, formatString){
+		console.log('adding legend');
+		// append legend container, giving it the styles we need to properly contain
+		const legendContainer = d3.select(mapContainer)
+			.append('div')
+			.classed('map__legend', true)
+			.style('background','red')
+			.style('position','absolute')
+			.style('left',0)
+			.style('top',0)
+			.style('z-index', 1000)
+			.style('width','100%')
+			.style('height','30px')
+			.style('background', 'white');
+		inlineQuantLegend(legendContainer, colorScale, opacityScale, formatString);
+	}
+
+
 class ChicagoChropleth {
 	constructor(options){
 		const app = this;
@@ -49,29 +67,19 @@ class ChicagoChropleth {
 		app.data = app.options.data;
 		app.ROOT_URL = app.options.ROOT_URL != undefined ? app.options.ROOT_URL : "";
 		app.tooltips = app.options.tooltipPropertyLabel;
+
+		// This draws the base leaflet map
 		app.initMap();
 
+		// Prep the ramps for D3 quantize scales and add the geojson data
 		app.colorRamp = cleanUpRamps(app.options.colorRamp)
 		app.opacityRamp = cleanUpRamps(app.options.opacityRamp)
 		app.drawGeojson(app.data, app.options.propertyToMap, app.colorRamp, app.opacityRamp)
-		
-		console.log(app.options.addLegend);
-		if (app.options.addLegend == true) {
-			app.addLegend()
-		}
-	}
-
-	addLegend(){
-	// 	console.log('adding legend');
-	// 	const app = this;
-	// 	const legendContainer = d3.select(app.container)
-	// 		.append('div')
-	// 		.classed('legend', true);
-	// 	app.addLegend(legendContainer);
 	}
 
 	initMap(){
 		const app = this;
+		app.container.style.position = 'relative';
 		app.map =  L.map(app.container,
 			{
 				center: app.options.mapCenter,
@@ -120,6 +128,11 @@ class ChicagoChropleth {
 				},
 				onEachFeature: onEachFeature(app.tooltips)
 			}).addTo(app.map);
+
+		if (app.options.addLegend == true) {
+			// if legends are enables in the options, then add one.
+			addLegend(app.container, mapColorScale, mapOpacityScale, app.options.legendFormatString);
+		}
 	}
 }
 

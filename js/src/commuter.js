@@ -18,7 +18,7 @@ window.onload = function(){
 				data:  data,
 				ROOT_URL: window.ROOT_URL,
 				mapCenter: [41.886635, -87.637839],
-				propertyToMap: "bicycle_MO",
+				propertyToMap: "bicycle",
 				// Use false or omit to skip tooltips. Otherwise, put the string of the feature property to go in the tooltip.
 				tooltipPropertyLabel: false,
 				// As many hex color strings (in order of lowest to highest) 
@@ -33,7 +33,8 @@ window.onload = function(){
 				opacityRamp:[.4, .9, .9, .9],
 				propertyStrokeColor:"transparent",
 				propertyStrokeWeight:0,
-				addLegend:false,
+				addLegend:true,
+				legendFormatString:'i',
 				// Must provide two lat/lng pairs (northwest and southeast 
 				// corners of the constrinaing rectangle) using this formula:
 				// [

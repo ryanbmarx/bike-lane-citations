@@ -2,21 +2,20 @@ import {formatSpecifier} from 'd3-format';
 import {format} from 'd3-format';
 import * as d3 from 'd3-selection';
 
-function formatter(number){
-	// Takes any number, and returns it as XXM, i.e 1,400,000 -> 1.4M
-	return format('$.3s')(number);
-}
 
-function inlineQuantLegend(container, colorScale, opacityScale){
+function inlineQuantLegend(container, colorScale, opacityScale, formatString){
 
 
 	if (container.node().childNodes.length > 0){
 		container.selectAll('*').remove();
 	}
-
+	console.log(colorScale);
 	const 	divisions = colorScale.range().length,
-			width = 100 / divisions;
+			width = 100 / divisions,
+			formatter = format(formatString);
 	
+	
+
 	let bucketCounter = 0;
 
 	colorScale.range().forEach( bucket =>{

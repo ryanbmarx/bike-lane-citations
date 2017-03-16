@@ -13,7 +13,6 @@ window.onload = function(){
 		for (var i = 0; i < maps.length; i++){
 			
 			const property = maps[i].dataset.value;
-			console.log(maps, maps[i].querySelector('.map__container'));
 			const commuters = new ChicagoChorpleth({
 				container: maps[i].querySelector('.map__container'),
 				data:  data,
@@ -24,17 +23,12 @@ window.onload = function(){
 				tooltipPropertyLabel: false,
 				// As many hex color strings (in order of lowest to highest) 
 				// as you would like, stored in an array.
-
-				colorRamp:[
-					"#FFFFC4",
-					"#F5F50A",
-					"#EB964F",
-					"#C11B17"
-				],
+				colorRamp:["#FFFFC4","#F5F50A","#EB964F","#C11B17"],
 				opacityRamp:[.5, .8, .8, .8],
-				addLegend:false,
-				propertyStrokeColor:"#eee",
-				propertyStrokeWeight:1,
+				addLegend:true, // Whether or not to show a legend
+				legendFormatString:'.1s', // d3.format() string.
+				propertyStrokeColor:"#eee", // border color for each shape on the map
+				propertyStrokeWeight:1, // Border weight for each feature
 				// Must provide two lat/lng pairs (northwest and southeast 
 				// corners of the constrinaing rectangle) using this formula:
 				// [
