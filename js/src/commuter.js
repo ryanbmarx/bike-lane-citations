@@ -25,12 +25,11 @@ window.onload = function(){
 				// as you would like, stored in an array.
 
 				colorRamp:[
-					"#FFFFC4",
-					"#F5F50A",
-					"#EB964F",
-					"#C11B17"
+					"orange"
 				],
-				opacityRamp:[.5, .8, .8, .8],
+				opacityRamp:[.2, .4, .6, .8, 1],
+				propertyStrokeColor:"transparent",
+				propertyStrokeWeight:0,
 				addLegend:false,
 				// Must provide two lat/lng pairs (northwest and southeast 
 				// corners of the constrinaing rectangle) using this formula:

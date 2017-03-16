@@ -33,6 +33,8 @@ window.onload = function(){
 				],
 				opacityRamp:[.5, .8, .8, .8],
 				addLegend:false,
+				propertyStrokeColor:"#eee",
+				propertyStrokeWeight:1,
 				// Must provide two lat/lng pairs (northwest and southeast 
 				// corners of the constrinaing rectangle) using this formula:
 				// [

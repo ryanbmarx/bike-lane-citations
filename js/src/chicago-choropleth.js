@@ -5,12 +5,12 @@ import * as L from "leaflet";
 import 'leaflet-providers';
 import inlineQuantLegend from './inline-quant-legend.js';
 
-function styleFeature(featureFillColor, featureOpacityColor){
+function styleFeature(featureFillColor, featureOpacityColor, featureStrokeColor, featureStrokeWeight){
 	// http://leafletjs.com/reference.html#path-options
 	return {
 		color: "#eee",
-		stroke:true,
-		weight:1,
+		stroke:featureStrokeColor,
+		weight:featureStrokeWeight,
 		fillColor:featureFillColor,
 		className:'tract',
 		fillOpacity: featureOpacityColor
@@ -93,11 +93,13 @@ class ChicagoChropleth {
 			L.geoJSON(data, {
 				style: function(feature){
 					// console.log(mapColorScale(parseFloat(feature.properties[propertyToMap])), feature.properties[propertyToMap]);
-					const featureFillColor = mapColorScale(parseFloat(feature.properties[propertyToMap]));
-					const featureFillOpacity = mapOpacityScale(parseFloat(feature.properties[propertyToMap]));
+					const 	featureFillColor = mapColorScale(parseFloat(feature.properties[propertyToMap])),
+							featureFillOpacity = mapOpacityScale(parseFloat(feature.properties[propertyToMap])),
+							featureStrokeColor = app.options.propertyStrokeColor,
+							featureStrokeWeight = app.options.propertyStrokeWeight;
 
 					// Returns a style object for each tract
-					return styleFeature(featureFillColor, featureFillOpacity);
+					return styleFeature(featureFillColor, featureFillOpacity, featureStrokeColor, featureStrokeWeight);
 				},
 				onEachFeature: onEachFeature(app.tooltips)
 			}).addTo(app.map);
