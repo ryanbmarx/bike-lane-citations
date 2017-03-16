@@ -1,5 +1,5 @@
-import {formatSpecifier} from 'd3';
-import {format} from 'd3';
+import {formatSpecifier} from 'd3-format';
+import {format} from 'd3-format';
 import * as d3 from 'd3-selection';
 
 function formatter(number){
@@ -7,22 +7,21 @@ function formatter(number){
 	return format('$.3s')(number);
 }
 
-function inlineQuantLegend(scale){
-	
+function inlineQuantLegend(container, colorScale, opacityScale){
 
-	const container = d3.select('#legend')
+
 	if (container.node().childNodes.length > 0){
 		container.selectAll('*').remove();
 	}
 
-	const 	divisions = scale.range().length,
+	const 	divisions = colorScale.range().length,
 			width = 100 / divisions;
 	
 	let bucketCounter = 0;
 
-	scale.range().forEach( bucket =>{
+	colorScale.range().forEach( bucket =>{
 
-		const bucketLabel = formatter(scale.invertExtent(bucket)[0]);
+		const bucketLabel = formatter(colorScale.invertExtent(bucket)[0]);
 
 		container.append('div')
 			.classed('legend__box', true)
@@ -50,7 +49,7 @@ function inlineQuantLegend(scale){
 		if (bucketCounter == divisions){
 			container.append('span')
 				.classed('legend__label', true)
-				.text(formatter(scale.invertExtent(bucket)[1]))
+				.text(formatter(colorScale.invertExtent(bucket)[1]))
 				.style('right', 0)
 				.style('margin-left', 0);
 		}
