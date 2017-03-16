@@ -6,19 +6,13 @@
       <div class='map__container'></div>
       <p class='map__source'>{{ map.sources }}</p>
   </div>
-{% endmacro %}}
+{% endmacro %}
 
 {% block content %}
 <div class='maps'>
   {{ make_map('nonwhite') }}
   {{ make_map('tix_biking') }}
-</div>
-  <div class='maps'>
-{#     <div id='map' class='map' data-value='tix_biking'></div>
-    <div id='map2' class='map' data-value='tix_parkin'></div>  
-    <div id='map3' class='map' data-value='pop_white'></div>  
- #}  </div>
-	
+</div>	
 
 {% endblock content %}
 
