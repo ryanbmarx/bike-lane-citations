@@ -5,18 +5,21 @@ import {json} from 'd3-request';
 window.onload = function(){
 	console.log('window is onloaded');
 	
-	const containers = document.querySelectorAll('.map');
+	const maps = document.querySelectorAll('.map');
 
-	json(`http://${ window.ROOT_URL }/data/test-tract-data2.geojson`, (err, data) => {
+	json(`http://${ window.ROOT_URL }/data/tickets-population.geojson`, (err, data) => {
 		if (err) throw err;
 
-		for (var i = 0; i < containers.length; i++){
+		for (var i = 0; i < maps.length; i++){
+			
+			const property = maps[i].dataset.value;
+			console.log(maps, maps[i].querySelector('.map__container'));
 			const commuters = new ChicagoChorpleth({
-				container: containers[i],
+				container: maps[i].querySelector('.map__container'),
 				data:  data,
 				ROOT_URL: window.ROOT_URL,
 				mapCenter: [41.886635, -87.637839],
-				propertyToMap: 'hispanic',
+				propertyToMap: property,
 				// As many hex color strings (in order of lowest to highest) 
 				// as you would like, stored in an array.
 
@@ -27,6 +30,7 @@ window.onload = function(){
 					"#C11B17"
 				],
 				opacityRamp:[.5, .8, .8, .8],
+				addLegend:false,
 				// Must provide two lat/lng pairs (northwest and southeast 
 				// corners of the constrinaing rectangle) using this formula:
 				// [
