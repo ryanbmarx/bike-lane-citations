@@ -1,13 +1,12 @@
 {% macro make_map(key) %}
   {% set map = maps[key] %}
   <div id='{{ key }}' class='map' data-value='{{ key }}'>
-      <h2 class='map__headline'>{{ map.headline }}</h2>
-      <p class='map__subheadline'>{{ map.subheadline }}</p>
+      <h2 class='map__headline'>{{ map.headline|process_text }}</h2>
+      <p class='map__subheadline'>{{ map.subheadline|process_text }}</p>
       <div class='map__container'></div>
-      <p class='map__source'>{{ map.sources }}</p>
+      <p class='map__source'>{{ map.sources|process_text }}</p>
   </div>
 {% endmacro %}
-
 {% block content %}
 <div class='maps'>
   {{ make_map('tix_parkin') }}
