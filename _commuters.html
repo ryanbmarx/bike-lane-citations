@@ -9,15 +9,9 @@
 {% endmacro %}
 
 {% block content %}
-<div class='maps'>
-  {{ make_map('pop_nonwhite') }}
-  {{ make_map('tix_biking') }}
+<div class='maps maps--commuter'>
+  {{ make_map('commuters') }}
 </div>	
-
-<div class='maps'>
-  {{ make_map('pop_nonwhite') }}
-  {{ make_map('tix_parkin') }}
-</div>  
 
 {% endblock content %}
 
