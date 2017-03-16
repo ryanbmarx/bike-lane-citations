@@ -8,6 +8,8 @@
 	display:flex;
 	flex-wrap:wrap;
 	justify-content:space-between;
+
+	&.maps--commuter .map{ width:100%; }
 }
 
 .map{
