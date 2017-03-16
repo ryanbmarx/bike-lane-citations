@@ -41,6 +41,27 @@ module.exports = function(grunt) {
           ]
         ]
       }
+    },
+    commuter: {
+      src: ['js/src/commuter.js'],
+      dest: 'js/commuter.min.js',
+      options: {
+        plugin: [
+          [
+            'minifyify', {
+              map: 'commuter.min.js.map',
+              output: './js/commuter.min.js.map'
+            }
+          ]
+        ],
+        transform: [
+          [
+            'babelify', {
+              presets: ['es2015']
+            }
+          ]
+        ]
+      }
     }
   };
 
@@ -86,7 +107,7 @@ module.exports = function(grunt) {
     },
     js: {
       files: ['js/src/**/*.js'],
-      tasks: ['browserify:app']
+      tasks: ['browserify:app', 'browserify:commuter']
     }
   };
 
