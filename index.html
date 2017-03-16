@@ -51,7 +51,28 @@
                     <div itemprop="articleBody">
                         <div class="trb_article_page" data-role="pagination_page" data-content-page="">
                             <div class="trb_article_page_body">
-                                {% include htmlstory_template|default("_htmlstory.html") %}
+
+                                <style type="text/css">
+                                    iframe{
+                                        width:600px;
+                                        height:575px;
+                                        border:none;
+                                        overflow:hidden;
+                                        margin-bottom:50px;
+                                        display: block;
+                                    }
+
+                                    iframe.mobile{
+                                        width:280px;
+                                        height:670px;
+                                    }
+
+                                </style>
+                                <iframe class='mobile' src='_cycling-citations.html'></iframe>
+                                <iframe src='_cycling-citations.html'></iframe>
+                                <hr>
+                                <iframe class='mobile' src='_parking-tickets.html'></iframe>
+                                <iframe src='_parking-tickets.html'></iframe>
                             </div>
                         </div>
                     </div>
