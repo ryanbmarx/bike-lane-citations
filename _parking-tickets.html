@@ -1,0 +1,48 @@
+{% macro make_map(key) %}
+  {% set map = maps[key] %}
+  <div id='{{ key }}' class='map' data-value='{{ key }}'>
+      <h2 class='map__headline'>{{ map.headline }}</h2>
+      <p class='map__subheadline'>{{ map.subheadline }}</p>
+      <div class='map__container'></div>
+      <p class='map__source'>{{ map.sources }}</p>
+  </div>
+{% endmacro %}
+
+{% block content %}
+<div class='maps'>
+  {{ make_map('pop_nonwhite') }}
+  {{ make_map('tix_biking') }}
+</div>	
+
+<div class='maps'>
+  {{ make_map('pop_nonwhite') }}
+  {{ make_map('tix_parkin') }}
+</div>  
+
+{% endblock content %}
+
+{% block library_scripts %}
+{# Uncomment this if you are using libraries such as jQuery #}
+<script src="//{{ ROOT_URL }}/js/vendor.min.js"></script>
+{% endblock %}
+
+{% block scripts %}
+{# Uncomment this if you are using custom JavaScript #}
+<script src="//{{ ROOT_URL }}/js/app.min.js"></script>
+<script>
+(function(document) {
+  var CSS = [
+    "//{{ ROOT_URL }}/css/styles.css"
+  ];
+
+	window.ROOT_URL = "{{ ROOT_URL }}";
+
+  CSS.forEach(function(url) {
+    var link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', url);
+    document.head.appendChild(link);
+  });
+})(document);
+</script>
+{% endblock scripts %}
