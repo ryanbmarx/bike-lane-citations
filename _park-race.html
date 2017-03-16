@@ -1,15 +1,23 @@
-{#
- # Template for an HTML story published to P2P.
- #
- # If you want to publish multiple HTML stories, copy, or inherit from
- # this template.
- #
- #}
-{% block content %}
-  <div class='maps'>
-    <div id='map' class='map'></div>
-    <div id='map2' class='map'></div>  
+{% macro make_map(key) %}
+  {% set map = maps[key] %}
+  <div id='{{ key }}' class='map' data-value='{{ key }}'>
+      <h2 class='map__headline'>{{ map.headline }}</h2>
+      <p class='map__subheadline'>{{ map.subheadline }}</p>
+      <div class='map__container'></div>
+      <p class='map__source'>{{ map.sources }}</p>
   </div>
+{% endmacro %}}
+
+{% block content %}
+<div class='maps'>
+  {{ make_map('nonwhite') }}
+  {{ make_map('tix_biking') }}
+</div>
+  <div class='maps'>
+{#     <div id='map' class='map' data-value='tix_biking'></div>
+    <div id='map2' class='map' data-value='tix_parkin'></div>  
+    <div id='map3' class='map' data-value='pop_white'></div>  
+ #}  </div>
 	
 
 {% endblock content %}
